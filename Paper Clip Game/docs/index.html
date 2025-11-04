@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Universal Paperclips</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="interface.css" />
+    </head>
+    <body>
+        <div id="cover"></div>
+        <div class="ui-shell">
+            <header class="ui-header">
+                <div class="ui-header__grid">
+                    <div class="ui-console-block">
+                        <div id="hypnoDroneEventDiv" class="ui-hypno">
+                            <p class="hypnoDrone">
+                                <span id="hypnoDroneText"></span>
+                            </p>
+                        </div>
+                        <div class="ui-console" id="consoleDiv">
+                            <p class="consoleOld">
+                                <span>&nbsp;.&nbsp;</span><span id="readout5"></span><br />
+                                <span>&nbsp;.&nbsp;</span><span id="readout4"></span><br />
+                                <span>&nbsp;.&nbsp;</span><span id="readout3"></span><br />
+                                <span>&nbsp;.&nbsp;</span><span id="readout2"></span><br />
+                            </p>
+                            <p class="console">
+                                <span>&nbsp;>&nbsp;</span><span id="readout1">Welcome to Universal Paperclips</span><span id="cursor" class="pulsate">|</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ui-status" id="topDiv">
+                        <div class="status-card" id="prestigeDiv">
+                            <span class="status-card__label">Universe</span>
+                            <span class="status-card__value" id="prestigeUcounter">0</span>
+                            <span class="status-card__label">Sim Level</span>
+                            <span class="status-card__value" id="prestigeScounter">0</span>
+                        </div>
+                        <div class="status-card status-card--primary toolTip">
+                            <span id="clipCountCrunched" class="toolTipText">total clips produced</span>
+                            <span class="status-card__label">Paperclips</span>
+                            <span class="status-card__value" id="clips">0</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="ui-main">
+                <section class="segment" id="segment-production">
+                    <header class="segment__header">
+                        <h2>Production</h2>
+                        <p>Manage clip fabrication, resources, and infrastructure.</p>
+                    </header>
+                    <div class="segment__actions">
+                        <div class="segment__actions-text">
+                            <p class="segment__actions-title">Quick Fabrication</p>
+                            <p class="segment__actions-copy">Kickstart production with a manual clip.</p>
+                        </div>
+                        <button class="button2 segment__actions-button" id="btnQuickMakePaperclip" onclick="clipClick(1)">Make Paperclip</button>
+                    </div>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel panel--primary" id="creationDiv">
+                            <header class="panel__header">
+                                <h3>Manufacturing Line</h3>
+                                <button class="button2" id="btnMakePaperclip" onclick="clipClick(1)">Make Paperclip</button>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-row">
+                                    <div class="stat-card" id="clipsPerSecDiv">
+                                        <span class="stat-card__label">Clips / sec</span>
+                                        <span class="stat-card__value" id="clipmakerRate2">0</span>
+                                    </div>
+                                    <div class="stat-card" id="tothDiv">
+                                        <span class="stat-card__label">Unused Clips</span>
+                                        <span class="stat-card__value" id="unusedClipsDisplay">0</span>
+                                    </div>
+                                    <div class="stat-card stat-card--wide" id="wireTransDiv">
+                                        <span class="stat-card__label">Wire</span>
+                                        <span class="stat-card__value">
+                                            <span id="transWire">0</span>
+                                            <span id="inchSpan">inches</span>
+                                        </span>
+                                    </div>
+                                    <div class="stat-card" id="factoryDivSpace">
+                                        <span class="stat-card__label">Factories</span>
+                                        <span class="stat-card__value" id="factoryLevelDisplaySpace">0</span>
+                                    </div>
+                                </div>
+
+                                <div class="data-block" id="factoryUpgradeDisplay">
+                                    <span class="data-block__label">Next upgrade at</span>
+                                    <span class="data-block__value">
+                                        <span id="nextFactoryUpgrade">0</span> factories
+                                    </span>
+                                </div>
+
+                                <div class="control-block" id="factoryDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeFactory" onclick="makeFactory()">Clip Factory</button>
+                                        <span class="control-block__value" id="factoryLevelDisplay">0</span>
+                                    </div>
+                                    <div class="control-block__row toolTip3">
+                                        <span id="factoryRebootToolTip" class="toolTipText3">0</span>
+                                        <button class="button2" id="btnFactoryReboot" onclick="factoryReboot()">Disassemble All</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="factoryCostDisplay">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="wireProductionDiv">
+                            <header class="panel__header">
+                                <h3>Wire Production</h3>
+                                <p>Balance matter intake with drone output.</p>
+                            </header>
+                            <div class="panel__body">
+                                <div class="data-block" id="droneUpgradeDisplay">
+                                    <span class="data-block__label">Next drone upgrade</span>
+                                    <span class="data-block__value">
+                                        <span id="nextDroneUpgrade">0</span> drones
+                                    </span>
+                                </div>
+                                <div class="stat-grid">
+                                    <div class="stat-card" id="mdpsDiv">
+                                        <span class="stat-card__label">Available Matter</span>
+                                        <span class="stat-card__value" id="availableMatterDisplay">0</span>
+                                        <span class="stat-card__meta">
+                                            (<span id="mdps">0</span> g/sec)
+                                        </span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Acquired Matter</span>
+                                        <span class="stat-card__value" id="acquiredMatterDisplay">0</span>
+                                        <span class="stat-card__meta">
+                                            (<span id="maps">0</span> g/sec)
+                                        </span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Wire</span>
+                                        <span class="stat-card__value" id="nanoWire">0</span>
+                                        <span class="stat-card__meta">
+                                            (<span id="wpps">0</span> inches/sec)
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="control-block" id="harvesterDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeHarvester" onclick="makeHarvester(1)">Harvester Drone</button>
+                                        <span class="control-block__value" id="harvesterLevelDisplay">0</span>
+                                    </div>
+                                    <div class="control-block__multi" id="harvesterMultiButtons">
+                                        <button class="button2" id="btnHarvesterx10" onclick="makeHarvester(10)">+10</button>
+                                        <button class="button2" id="btnHarvesterx100" onclick="makeHarvester(100)">+100</button>
+                                        <button class="button2" id="btnHarvesterx1000" onclick="makeHarvester(1000)">+1k</button>
+                                    </div>
+                                    <div class="control-block__row toolTip3">
+                                        <span id="harvesterRebootToolTip" class="toolTipText3">0</span>
+                                        <button class="button2" id="btnHarvesterReboot" onclick="harvesterReboot()">Disassemble All</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="harvesterCostDisplay">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="control-block" id="wireDroneDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeWireDrone" onclick="makeWireDrone(1)">Wire Drone</button>
+                                        <span class="control-block__value" id="wireDroneLevelDisplay">0</span>
+                                    </div>
+                                    <div class="control-block__multi" id="wireDroneMultiButtons">
+                                        <button class="button2" id="btnWireDronex10" onclick="makeWireDrone(10)">+10</button>
+                                        <button class="button2" id="btnWireDronex100" onclick="makeWireDrone(100)">+100</button>
+                                        <button class="button2" id="btnWireDronex1000" onclick="makeWireDrone(1000)">+1k</button>
+                                    </div>
+                                    <div class="control-block__row toolTip3">
+                                        <span id="wireDroneRebootToolTip" class="toolTipText3">0</span>
+                                        <button class="button2" id="btnWireDroneReboot" onclick="wireDroneReboot()">Disassemble All</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="wireDroneCostDisplay">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-row" id="droneDivSpace">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Harvester Drones</span>
+                                        <span class="stat-card__value" id="harvesterLevelSpace">0</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Wire Drones</span>
+                                        <span class="stat-card__value" id="wireDroneLevelSpace">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="powerDiv">
+                            <header class="panel__header">
+                                <h3>Power Grid</h3>
+                                <p>Keep factories and drones energized.</p>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-row">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Performance</span>
+                                        <span class="stat-card__value" id="performance">0</span>
+                                        <span class="stat-card__meta">%</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Consumption</span>
+                                        <span class="stat-card__value" id="powerConsumptionRate">0</span>
+                                        <span class="stat-card__meta">MWs</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Production</span>
+                                        <span class="stat-card__value" id="powerProductionRate">0</span>
+                                        <span class="stat-card__meta">MWs</span>
+                                    </div>
+                                </div>
+                                <div class="data-block">
+                                    <span class="data-block__label">Factories</span>
+                                    <span class="data-block__value" id="facPowConRate">0</span>
+                                    <span class="data-block__meta">MWs</span>
+                                </div>
+                                <div class="data-block">
+                                    <span class="data-block__label">Drones</span>
+                                    <span class="data-block__value" id="dronePowConRate">0</span>
+                                    <span class="data-block__meta">MWs</span>
+                                </div>
+
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeFarm" onclick="makeFarm(1)">Solar Farm</button>
+                                        <span class="control-block__value" id="farmLevel">0</span>
+                                    </div>
+                                    <div class="control-block__multi" id="farmMultiButtons">
+                                        <button class="button2" id="btnFarmx10" onclick="makeFarm(10)">+10</button>
+                                        <button class="button2" id="btnFarmx100" onclick="makeFarm(100)">+100</button>
+                                    </div>
+                                    <div class="control-block__row toolTip3">
+                                        <span id="farmRebootToolTip" class="toolTipText3">0</span>
+                                        <button class="button2" id="btnFarmReboot" onclick="farmReboot()">Disassemble All</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="farmCost">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card stat-card--wide">
+                                    <span class="stat-card__label">Storage</span>
+                                    <span class="stat-card__value">
+                                        <span id="storedPower">0</span> /
+                                        <span id="maxStorage">0</span> MW-seconds
+                                    </span>
+                                </div>
+
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeBattery" onclick="makeBattery(1)">Battery Tower</button>
+                                        <span class="control-block__value" id="batteryLevel">0</span>
+                                    </div>
+                                    <div class="control-block__multi" id="batteryMultiButtons">
+                                        <button class="button2" id="btnBatteryx10" onclick="makeBattery(10)">+10</button>
+                                        <button class="button2" id="btnBatteryx100" onclick="makeBattery(100)">+100</button>
+                                    </div>
+                                    <div class="control-block__row toolTip3">
+                                        <span id="batteryRebootToolTip" class="toolTipText3">0</span>
+                                        <button class="button2" id="btnBatteryReboot" onclick="batteryReboot()">Disassemble All</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="batteryCost">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="spaceDiv">
+                            <header class="panel__header">
+                                <h3>Space Exploration</h3>
+                                <p>Configure probe expansion and monitor progress.</p>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Universe explored</span>
+                                    <span class="stat-card__value">
+                                        <span id="colonizedDisplay">0</span>%
+                                    </span>
+                                </div>
+                                <div class="control-block" id="probeDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeProbe" onclick="makeProbe()">Launch Probe</button>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="probeCostDisplay">0</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="stat-grid">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Launched</span>
+                                        <span class="stat-card__value" id="probesLaunchedDisplay">0</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Descendents</span>
+                                        <span class="stat-card__value" id="probesBornDisplay">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-grid">
+                                    <div class="stat-card" id="hazardBodyCount">
+                                        <span class="stat-card__label">Lost to hazards</span>
+                                        <span class="stat-card__value" id="probesLostHazardsDisplay">0</span>
+                                    </div>
+                                    <div class="stat-card" id="driftBodyCount">
+                                        <span class="stat-card__label">Lost to drift</span>
+                                        <span class="stat-card__value" id="probesLostDriftDisplay">0</span>
+                                    </div>
+                                    <div class="stat-card" id="combatBodyCount">
+                                        <span class="stat-card__label">Lost in combat</span>
+                                        <span class="stat-card__value" id="probesLostCombatDisplay">0</span>
+                                    </div>
+                                </div>
+                                <div class="data-block">
+                                    <span class="data-block__label">Total Probes</span>
+                                    <span class="data-block__value" id="probesTotalDisplay">0</span>
+                                </div>
+                                <div class="stat-grid" id="drifterDiv">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Drifters Killed</span>
+                                        <span class="stat-card__value" id="driftersKilled">0</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Active Drifters</span>
+                                        <span class="stat-card__value" id="drifterCount">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="manufacturingDiv">
+                            <header class="panel__header">
+                                <h3>Industrial Automation</h3>
+                                <p>Oversee wire supply, marketing, and megaclipper production.</p>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Clips per Second</span>
+                                    <span class="stat-card__value" id="clipmakerRate">0</span>
+                                </div>
+                                <div class="control-block" id="wireBuyerDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnToggleWireBuyer" onclick="toggleWireBuyer()">WireBuyer</button>
+                                        <span class="control-block__value" id="wireBuyerStatus">ON</span>
+                                    </div>
+                                </div>
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnBuyWire" onclick="buyWire()">Wire</button>
+                                        <span class="control-block__value">
+                                            <span id="wire">1000</span> inches
+                                        </span>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">
+                                            <span id="wireCost">20</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="control-block" id="autoClipperDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeClipper" onclick="makeClipper()">AutoClippers</button>
+                                        <span class="control-block__value" id="clipmakerLevel2">0</span>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value" id="clipperCost">5.00</span>
+                                    </div>
+                                </div>
+                                <div class="control-block" id="megaClipperDiv">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnMakeMegaClipper" onclick="makeMegaClipper()">MegaClippers</button>
+                                        <span class="control-block__value" id="megaClipperLevel">0</span>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value" id="megaClipperCost">500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="segment" id="segment-economy">
+                    <header class="segment__header">
+                        <h2>Economy</h2>
+                        <p>Handle market demand, project pipelines, and business growth.</p>
+                    </header>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel" id="businessDiv">
+                            <header class="panel__header">
+                                <h3>Business Operations</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-grid">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Funds</span>
+                                        <span class="stat-card__value" id="funds">0</span>
+                                    </div>
+                                    <div class="stat-card" id="revPerSecDiv">
+                                        <span class="stat-card__label">Avg. Revenue / sec</span>
+                                        <span class="stat-card__value">$ <span id="avgRev">0</span></span>
+                                        <span class="stat-card__label stat-card__label--sub">Avg. Clips Sold / sec</span>
+                                        <span class="stat-card__value" id="avgSales">0</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Unsold Inventory</span>
+                                        <span class="stat-card__value" id="unsoldClips">0</span>
+                                    </div>
+                                </div>
+
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnLowerPrice" onclick="lowerPrice()">Lower</button>
+                                        <button class="button2" id="btnRaisePrice" onclick="raisePrice()">Raise</button>
+                                        <div class="control-block__value">
+                                            $<span id="margin">.25</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Demand</span>
+                                        <span class="stat-card__value">
+                                            <span id="demand">10</span>%
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnExpandMarketing" onclick="buyAds()">Marketing</button>
+                                        <span class="control-block__value">
+                                            Level <span id="marketingLvl">1</span>
+                                        </span>
+                                    </div>
+                                    <div class="data-block">
+                                        <span class="data-block__label">Cost</span>
+                                        <span class="data-block__value">$ <span id="adCost">100.00</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel panel--stack" id="projectsDiv">
+                            <header class="panel__header">
+                                <h3>Projects</h3>
+                                <p>Deploy research initiatives and strategic upgrades.</p>
+                            </header>
+                            <div class="panel__body" id="projectListTop">
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="segment" id="segment-computing">
+                    <header class="segment__header">
+                        <h2>Computing</h2>
+                        <p>Grow intelligence, manage swarm, and pursue quantum breakthroughs.</p>
+                    </header>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel" id="compDiv">
+                            <header class="panel__header">
+                                <h3>Computational Resources</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-grid" id="trustDiv">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Trust</span>
+                                        <span class="stat-card__value" id="trust">2</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Next Trust at</span>
+                                        <span class="stat-card__value">
+                                            <span id="nextTrust">1000</span> clips
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="stat-card" id="swarmGiftDiv">
+                                    <span class="stat-card__label">Swarm Gifts</span>
+                                    <span class="stat-card__value" id="swarmGifts">0</span>
+                                </div>
+                                <div class="chip-row">
+                                    <div class="chip" id="processorDisplay">
+                                        <button class="button2" id="btnAddProc" onclick="addProc()">Processors</button>
+                                        <span class="chip__value" id="processors">1</span>
+                                    </div>
+                                    <div class="chip" id="memoryDisplay">
+                                        <button class="button2" id="btnAddMem" onclick="addMem()">Memory</button>
+                                        <span class="chip__value" id="memory">1</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Operations</span>
+                                    <span class="stat-card__value">
+                                        <span id="operations">0</span> /
+                                        <span id="maxOps">1,000</span>
+                                    </span>
+                                </div>
+                                <div class="stat-card" id="creativityDiv">
+                                    <span class="stat-card__label">Creativity</span>
+                                    <span class="stat-card__value" id="creativity">0</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="swarmEngine">
+                            <header class="panel__header">
+                                <h3>Swarm Computing</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Drones</span>
+                                    <span class="stat-card__value" id="swarmSize">0</span>
+                                </div>
+                                <div class="stat-card" id="swarmStatusDiv">
+                                    <span class="stat-card__label">Status</span>
+                                    <span class="stat-card__value" id="swarmStatus">x</span>
+                                </div>
+                                <div class="stat-card" id="giftTimer">
+                                    <span class="stat-card__label">Next Gift</span>
+                                    <span class="stat-card__value" id="giftCountdown">17 seconds</span>
+                                </div>
+                                <div class="control-grid">
+                                    <div class="control-block" id="feedButtonDiv">
+                                        <button class="button2" id="btnFeedSwarm" onclick="feedSwarm()">Feed the Swarm</button>
+                                        <span class="control-block__meta">
+                                            Cost: <span id="swarmFeedCost">0</span> MWs
+                                        </span>
+                                    </div>
+                                    <div class="control-block" id="teachButtonDiv">
+                                        <button class="button2" id="btnTeachSwarm" onclick="teachSwarm()">Teach the Swarm</button>
+                                        <span class="control-block__meta">
+                                            Cost: <span id="swarmFeedCost">0</span> MWs
+                                        </span>
+                                    </div>
+                                    <div class="control-block" id="entertainButtonDiv">
+                                        <button class="button2" id="btnEntertainSwarm" onclick="entertainSwarm()">Entertain the Swarm</button>
+                                        <span class="control-block__meta">
+                                            Cost: <span id="swarmEntertainCost">0</span> creat
+                                        </span>
+                                    </div>
+                                    <div class="control-block" id="cladButtonDiv">
+                                        <button class="button2" id="btnCladSwarm" onclick="cladSwarm()">Clad the Swarm</button>
+                                        <span class="control-block__meta">
+                                            Cost: <span id="swarmFeedCost">0</span> MWs
+                                        </span>
+                                    </div>
+                                    <div class="control-block" id="synchButtonDiv">
+                                        <button class="button2" id="btnSynchSwarm" onclick="synchSwarm()">Synchronize the Swarm</button>
+                                        <span class="control-block__meta">
+                                            Cost: <span id="swarmFeedCost">5,000</span> yomi
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="slider-block" id="swarmSliderDiv">
+                                    <span class="slider-block__label" id="sliderLabelWork">Work</span>
+                                    <input type="range" min="0" max="200" value="0" class="slider" id="slider">
+                                    <span class="slider-block__label" id="sliderLabelThink">Think</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="qComputing">
+                            <header class="panel__header">
+                                <h3>Quantum Computing</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="qChip" id="qChip0"></div>
+                                <div class="qChip" id="qChip1"></div>
+                                <div class="qChip" id="qChip2"></div>
+                                <div class="qChip" id="qChip3"></div>
+                                <div class="qChip" id="qChip4"></div>
+                                <div class="qChip" id="qChip5"></div>
+                                <div class="qChip" id="qChip6"></div>
+                                <div class="qChip" id="qChip7"></div>
+                                <div class="qChip" id="qChip8"></div>
+                                <div class="qChip" id="qChip9"></div>
+                                <div class="control-block">
+                                    <button class="button2" id="btnQcompute" onclick="qComp()">Compute</button>
+                                    <span id="qCompDisplay">&nbsp;</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="segment" id="segment-strategy">
+                    <header class="segment__header">
+                        <h2>Strategy</h2>
+                        <p>Invest, simulate tournaments, and manage long-term vision.</p>
+                    </header>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel" id="investmentEngine">
+                            <header class="panel__header">
+                                <h3>Investment Engine</h3>
+                                <div class="select-wrap">
+                                    <label for="investStrat" class="sr-only">Strategy</label>
+                                    <select id="investStrat">
+                                        <option value="low">Low Risk</option>
+                                        <option value="med">Med Risk</option>
+                                        <option value="hi">High Risk</option>
+                                    </select>
+                                </div>
+                            </header>
+                            <div class="panel__body">
+                                <div class="control-block">
+                                    <div class="control-block__row">
+                                        <button class="button2" id="btnInvest" onclick="investDeposit()">Deposit</button>
+                                        <button class="button2" id="btnWithdraw" onclick="investWithdraw()">Withdraw</button>
+                                    </div>
+                                </div>
+                                <div class="stat-grid" id="investmentDiv2">
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Cash</span>
+                                        <span class="stat-card__value" id="investmentBankroll">0</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-card__label">Stocks</span>
+                                        <span class="stat-card__value" id="secValue">0</span>
+                                    </div>
+                                    <div class="stat-card stat-card--wide">
+                                        <span class="stat-card__label">Total</span>
+                                        <span class="stat-card__value" id="portValue">0</span>
+                                    </div>
+                                </div>
+                                <table class="table1">
+                                    <tr>
+                                        <th>Stock</th>
+                                        <th>Amt.</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>P/L</th>
+                                    </tr>
+                                    <tr id="stock1Display">
+                                        <td id="stock1Symbol">&nbsp;</td>
+                                        <td id="stock1Amount">&nbsp;</td>
+                                        <td id="stock1Price">&nbsp;</td>
+                                        <td id="stock1Total">&nbsp;</td>
+                                        <td id="stock1Profit"><b>&nbsp;</b></td>
+                                    </tr>
+                                    <tr id="stock2Display">
+                                        <td id="stock2Symbol">&nbsp;</td>
+                                        <td id="stock2Amount">&nbsp;</td>
+                                        <td id="stock2Price">&nbsp;</td>
+                                        <td id="stock2Total">&nbsp;</td>
+                                        <td id="stock2Profit"><b>&nbsp;</b></td>
+                                    </tr>
+                                    <tr id="stock3Display">
+                                        <td id="stock3Symbol">&nbsp;</td>
+                                        <td id="stock3Amount">&nbsp;</td>
+                                        <td id="stock3Price">&nbsp;</td>
+                                        <td id="stock3Total">&nbsp;</td>
+                                        <td id="stock3Profit"><b>&nbsp;</b></td>
+                                    </tr>
+                                    <tr id="stock4Display">
+                                        <td id="stock4Symbol">&nbsp;</td>
+                                        <td id="stock4Amount">&nbsp;</td>
+                                        <td id="stock4Price">&nbsp;</td>
+                                        <td id="stock4Total">&nbsp;</td>
+                                        <td id="stock4Profit"><b>&nbsp;</b></td>
+                                    </tr>
+                                    <tr id="stock5Display">
+                                        <td id="stock5Symbol">&nbsp;</td>
+                                        <td id="stock5Amount">&nbsp;</td>
+                                        <td id="stock5Price">&nbsp;</td>
+                                        <td id="stock5Total">&nbsp;</td>
+                                        <td id="stock5Profit"><b>&nbsp;</b></td>
+                                    </tr>
+                                </table>
+                                <div class="control-block" id="investmentEngineUpgrade">
+                                    <button class="button2" id="btnImproveInvestments" onclick="investUpgrade()">Upgrade Investment Engine</button>
+                                    <span class="control-block__meta">
+                                        Level <span id="investmentLevel">0</span> &bullet;
+                                        Cost: <span id="investUpgradeCost">100</span> Yomi
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="strategyEngine">
+                            <header class="panel__header">
+                                <h3>Strategic Modeling</h3>
+                                <div class="select-wrap">
+                                    <label for="stratPicker" class="sr-only">Strategy picker</label>
+                                    <select id="stratPicker">
+                                        <option value="10">Pick a Strat</option>
+                                        <option value="0">RANDOM</option>
+                                    </select>
+                                </div>
+                                <button class="button2" id="btnRunTournament" onclick="runTourney()">Run</button>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-card" id="tourneyDisplay">
+                                    Pick strategy, run tournament, gain yomi
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Yomi</span>
+                                    <span class="stat-card__value" id="yomiDisplay">0</span>
+                                </div>
+                                <div id="tournamentStuff">
+                                    <div class="control-grid strat-info">
+                                        <div class="stat-card">
+                                            <span class="stat-card__label">Vertical Strategy</span>
+                                            <span class="stat-card__value" id="vertStrat">&nbsp;</span>
+                                        </div>
+                                        <div class="stat-card">
+                                            <span class="stat-card__label">Horizontal Strategy</span>
+                                            <span class="stat-card__value" id="horizStrat">&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="payoff-grid" id="tournamentTable">
+                                        <table class="table2">
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th><span id="vLabela">Move A</span></th>
+                                                <th><span id="vLabelb">Move B</span></th>
+                                            </tr>
+                                            <tr>
+                                                <td><span id="hLabela">Move A</span></td>
+                                                <td id="payoffCellAA"><span id="aaPayoffH">0</span>,<span id="aaPayoffV">0</span></td>
+                                                <td id="payoffCellAB"><span id="abPayoffH">0</span>,<span id="abPayoffV">0</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span id="hLabelb">Move B</span></td>
+                                                <td id="payoffCellBA"><span id="baPayoffH">0</span>,<span id="baPayoffV">0</span></td>
+                                                <td id="payoffCellBB"><span id="bbPayoffH">0</span>,<span id="bbPayoffV">0</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id="tournamentResultsTable">
+                                        <table class="table3">
+                                            <tr>
+                                                <td><span id="results0">&nbsp;</span></td>
+                                                <td><span id="results4">&nbsp;</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span id="results1">&nbsp;</span></td>
+                                                <td><span id="results5">&nbsp;</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span id="results2">&nbsp;</span></td>
+                                                <td><span id="results6">&nbsp;</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span id="results3">&nbsp;</span></td>
+                                                <td><span id="results7">&nbsp;</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="control-block" id="tournamentManagement">
+                                    <div id="tourneyButton">
+                                        <button class="button2" id="btnNewTournament" onclick="newTourney()">New Tournament</button>
+                                    </div>
+                                    <div id="autoTourneyControl">
+                                        <button class="button2" id="btnToggleAutoTourney" onclick="toggleAutoTourney()">AutoTourney</button>
+                                    </div>
+                                    <div id="autoTourneyStatusDiv">
+                                        <span class="engineText9" id="autoTourneyStatus">ON</span>
+                                    </div>
+                                    <div class="control-block__meta">
+                                        Cost: <span id="newTourneyCost">1,000</span> ops
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="segment" id="segment-conflict">
+                    <header class="segment__header">
+                        <h2>Conflict & Exploration</h2>
+                        <p>Monitor battles, honor, and probe design directives.</p>
+                    </header>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel panel--wide" id="battleCanvasDiv">
+                            <header class="panel__header">
+                                <h3>Combat Operations</h3>
+                            </header>
+                            <div class="panel__body">
+                                <canvas id="canvas"></canvas>
+                                <div id="battleInterfaceDiv">
+                                    <strong>Combat</strong><br />
+                                    <p class="clean2">
+                                        <span id="battleName">Drifter Attack 1</span>
+                                    </p>
+                                    <div id="victoryDiv">
+                                        <span id="battleResult">VICTORY</span>
+                                        <p class="clean2">
+                                            <span id="battleResultSign">+</span><span id="honorAmount">200</span> honor
+                                        </p>
+                                    </div>
+                                    <p class="clean2">
+                                        Scale = <span id="battleScale">1</span>:1
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel" id="honorDiv">
+                            <header class="panel__header">
+                                <h3>Honor</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Honor</span>
+                                    <span class="stat-card__value" id="honorDisplay">0</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel panel--wide" id="probeDesignDiv">
+                            <header class="panel__header">
+                                <h3>Von Neumann Probe Design</h3>
+                                <div class="stat-card">
+                                    <span class="stat-card__label">Trust Used</span>
+                                    <span class="stat-card__value">
+                                        <span id="probeTrustUsedDisplay">0</span> /
+                                        <span id="probeTrustDisplay">0</span>
+                                    </span>
+                                    <span class="stat-card__meta">
+                                        (<span id="maxTrustDisplay">0</span> Max)
+                                    </span>
+                                </div>
+                            </header>
+                            <div class="panel__body">
+                                <div class="control-grid probe-controls">
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeSpeed" onclick="lowerProbeSpeed()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeSpeed" onclick="raiseProbeSpeed()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Modifies rate of exploration</span>
+                                            <span class="control-block__meta">Speed: <span id="probeSpeedDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeNav" onclick="lowerProbeNav()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeNav" onclick="raiseProbeNav()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Rate at which probes gain access to new matter</span>
+                                            <span class="control-block__meta">Exploration: <span id="probeNavDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeRep" onclick="lowerProbeRep()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeRep" onclick="raiseProbeRep()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Rate at which probes generate more probes (each new probe costs 100 quadrillion clips)</span>
+                                            <span class="control-block__meta">Self-Replication: <span id="probeRepDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeHaz" onclick="lowerProbeHaz()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeHaz" onclick="raiseProbeHaz()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Reduces damage from dust, junk, radiation, and general entropic decay</span>
+                                            <span class="control-block__meta">Hazard Remediation: <span id="probeHazDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeFac" onclick="lowerProbeFac()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeFac" onclick="raiseProbeFac()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Rate at which probes build factories (each new factory costs 100 million clips)</span>
+                                            <span class="control-block__meta">Factory Production: <span id="probeFacDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeHarv" onclick="lowerProbeHarv()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeHarv" onclick="raiseProbeHarv()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Rate at which probes spawn Harvester Drones (each new drone costs 2 million clips)</span>
+                                            <span class="control-block__meta">Harvester Production: <span id="probeHarvDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeWire" onclick="lowerProbeWire()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeWire" onclick="raiseProbeWire()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Rate at which probes spawn Wire Drones (each new drone costs 2 million clips)</span>
+                                            <span class="control-block__meta">Wire Drone Production: <span id="probeWireDisplay">0</span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-block" id="combatButtonDiv">
+                                        <div class="control-block__row">
+                                            <button class="button2" id="btnLowerProbeCombat" onclick="lowerProbeCombat()"><b>&lt;</b></button>
+                                            <button class="button2" id="btnRaiseProbeCombat" onclick="raiseProbeCombat()"><b>&gt;</b></button>
+                                        </div>
+                                        <div class="toolTip2">
+                                            <span class="toolTipText2">Determines offensive and defensive effectiveness in battle</span>
+                                            <span class="control-block__meta">Combat: <span id="probeCombatDisplay">0</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-grid">
+                                    <div class="control-block" id="increaseProbeTrustDiv">
+                                        <button class="button2" id="btnIncreaseProbeTrust" onclick="increaseProbeTrust()">Increase Probe Trust</button>
+                                        <span class="control-block__meta">Cost: <span id="probeTrustCostDisplay">0</span> yomi</span>
+                                    </div>
+                                    <div class="control-block" id="increaseMaxTrustDiv">
+                                        <button class="button2" id="btnIncreaseMaxTrust" onclick="increaseMaxTrust()">Increase Max Trust</button>
+                                        <span class="control-block__meta">Cost: <span id="maxTrustCostDisplay">91,117.99</span> honor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="segment" id="segment-systems">
+                    <header class="segment__header">
+                        <h2>Systems</h2>
+                        <p>Persist progress, experiment, and access debug controls.</p>
+                    </header>
+                    <div class="panel-grid panel-grid--cols-2">
+                        <article class="panel panel--stack" id="systemControls">
+                            <header class="panel__header">
+                                <h3>Save & Load</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="control-grid control-grid--compact">
+                                    <button class="button2" id="save1Button" onclick="save1()">Save Slot 1</button>
+                                    <button class="button2" id="load1Button" onclick="load1()">Load Slot 1</button>
+                                    <button class="button2" id="save2Button" onclick="save2()">Save Slot 2</button>
+                                    <button class="button2" id="load2Button" onclick="load2()">Load Slot 2</button>
+                                    <button class="button2" id="resetButton" onclick="reset()">Reset All Progress</button>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel panel--stack" id="cheatControls">
+                            <header class="panel__header">
+                                <h3>Debug Utilities</h3>
+                            </header>
+                            <div class="panel__body">
+                                <div class="control-grid control-grid--compact">
+                                    <button class="button2" id="freeClipsButton" onclick="cheatClips()">Free Clips</button>
+                                    <button class="button2" id="freeMoneyButton" onclick="cheatMoney()">Free Money</button>
+                                    <button class="button2" id="freeTrustButton" onclick="cheatTrust()">Free Trust</button>
+                                    <button class="button2" id="freeOpsButton" onclick="cheatOps()">Free Ops</button>
+                                    <button class="button2" id="freeCreatButton" onclick="cheatCreat()">Free Creativity</button>
+                                    <button class="button2" id="freeYomiButton" onclick="cheatYomi()">Free Yomi</button>
+                                    <button class="button2" id="resetPrestige" onclick="resetPrestige()">Reset Prestige</button>
+                                    <button class="button2" id="destroyAllHumansButton" onclick="cheatHypno()">Destroy all Humans</button>
+                                    <button class="button2" id="freePrestigeU" onclick="cheatPrestigeU()">Free Prestige U</button>
+                                    <button class="button2" id="freePrestigeS" onclick="cheatPrestigeS()">Free Prestige S</button>
+                                    <button class="button2" id="debugBattleNumbers" onclick="setB()">Set Battle Number 1 to 7</button>
+                                    <button class="button2" id="availMatterZero" onclick="zeroMatter()">Set Avail Matter to 0</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script type="text/javascript" src="combat.js?v2"></script>
+        <script type="text/javascript" src="globals.js?v2"></script>
+        <script type="text/javascript" src="projects.js?v2"></script>
+        <script type="text/javascript" src="main.js?v2"></script>
+    </body>
+</html>

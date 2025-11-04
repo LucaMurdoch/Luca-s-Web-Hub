@@ -1,0 +1,157 @@
+:root {
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 170, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(0, 153, 102, 0.08), transparent 50%),
+        #020a04;
+    font-family: "Fira Code", "Source Code Pro", "Courier New", monospace;
+    color: #7effc5;
+    letter-spacing: 0.07em;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: conic-gradient(from 90deg, rgba(16, 128, 88, 0.12), transparent 55%, rgba(16, 128, 88, 0.2));
+    filter: blur(80px);
+    opacity: 0.65;
+    animation: drift 40s linear infinite;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0,
+        rgba(0, 255, 152, 0.04) 2px,
+        rgba(0, 0, 0, 0) 4px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.frame {
+    width: min(90vw, 540px);
+    background: rgba(0, 10, 6, 0.92);
+    border: 2px solid rgba(0, 255, 145, 0.35);
+    box-shadow:
+        0 0 40px rgba(0, 255, 168, 0.28),
+        inset 0 0 40px rgba(0, 64, 38, 0.78);
+    padding: 3rem 2.5rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    backdrop-filter: blur(3px);
+}
+
+.frame::before,
+.frame::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(0, 255, 175, 0.12);
+    pointer-events: none;
+}
+
+.frame::after {
+    inset: 16px;
+    border-color: rgba(0, 255, 175, 0.08);
+}
+
+.terminal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: transform 180ms ease, text-shadow 180ms ease;
+}
+
+.terminal::after {
+    content: "";
+    position: absolute;
+    inset: -12px -18px;
+    border: 1px solid rgba(126, 255, 197, 0.08);
+    box-shadow: 0 0 12px rgba(126, 255, 197, 0.12);
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+}
+
+.terminal:hover,
+.terminal:focus-visible {
+    transform: scale(1.02);
+    text-shadow: 0 0 16px rgba(126, 255, 197, 0.45);
+}
+
+.terminal:hover::after,
+.terminal:focus-visible::after {
+    opacity: 1;
+}
+
+.terminal__prompt,
+.terminal__hint {
+    margin: 0;
+}
+
+.terminal__prompt {
+    font-size: clamp(0.85rem, 2.4vw, 1rem);
+    text-transform: uppercase;
+    color: #00ff9c;
+    text-shadow: 0 0 8px rgba(0, 255, 156, 0.35);
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+.terminal__hint {
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    color: rgba(126, 255, 197, 0.65);
+    letter-spacing: 0.3em;
+}
+
+img {
+    width: min(100%, 460px);
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 168, 0.25));
+}
+
+@keyframes drift {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(8deg) scale(1.05);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
