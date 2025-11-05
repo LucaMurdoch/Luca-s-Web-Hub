@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paperclip Command</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="viewport">
+      <header class="masthead">
+        <div class="masthead__glyph">>_</div>
+        <div class="masthead__meta">
+          <h1>Paperclip Command Game</h1>
+          <p class="masthead__subtitle">Acquire the paperclips. On god fr fr</p>
+        </div>
+      </header>
+
+      <section class="grid">
+        <aside class="panel panel--status">
+          <h2 class="panel__title">Fabricator Status</h2>
+          <dl class="stats" id="coreStats"></dl>
+          <div class="divider"></div>
+          <h2 class="panel__title">Automation</h2>
+          <ul class="automation" id="automationList"></ul>
+        </aside>
+
+        <section class="panel panel--console">
+          <div class="console" id="log"></div>
+          <div class="prompt">
+            <span class="prompt__caret">&gt;</span>
+            <input
+              id="commandInput"
+              class="prompt__input"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              aria-label="Command input"
+              placeholder="Type help and press Enter"
+            />
+          </div>
+          <div class="quick-actions" id="quickActions"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
