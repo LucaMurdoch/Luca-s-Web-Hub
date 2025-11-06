@@ -36,12 +36,12 @@
                     radial-gradient(circle at bottom right, rgba(93, 255, 175, 0.14), transparent 58%),
                     var(--bg-main);
                 position: relative;
-                overflow: hidden;
+                overflow-x: hidden;
             }
 
             body::before {
                 content: "";
-                position: absolute;
+                position: fixed;
                 inset: -35%;
                 background: conic-gradient(
                     from 120deg at 50% 50%,
@@ -58,7 +58,7 @@
 
             body::after {
                 content: "";
-                position: absolute;
+                position: fixed;
                 inset: -12%;
                 background-image:
                     repeating-linear-gradient(0deg, transparent 0 44px, var(--grid) 44px 45px),
@@ -436,6 +436,8 @@
 
             @media (max-width: 640px) {
                 body {
+                    align-items: flex-start;
+                    justify-content: flex-start;
                     padding: 28px 16px;
                 }
 
@@ -504,13 +506,17 @@
                         </a>
                     </li>
                     <li>
-                        <div class="hub-card hub-card--disabled" role="link" aria-disabled="true">
-                            <span class="hub-card__status hub-card__status--soon">Coming Soon</span>
+                        <a
+                            class="hub-card"
+                            href="WebProxy/Luca%27s%20Proxy.zip"
+                            download="Luca-Proxy.zip"
+                        >
+                            <span class="hub-card__status hub-card__status--live">Download</span>
                             <span class="hub-card__eyebrow">Network Tool</span>
                             <span class="hub-card__title">WebProxy</span>
-                            <span class="hub-card__meta">Roadmapped for release Soon on god</span>
+                            <span class="hub-card__meta">Grab the latest proxy build as a zip file</span>
                             <span class="hub-card__pulse" aria-hidden="true"></span>
-                        </div>
+                        </a>
                     </li>
                 </ul>
                 <p class="meta">Additional modules will appear here as they move through release.</p>

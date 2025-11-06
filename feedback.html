@@ -34,7 +34,7 @@
                     radial-gradient(circle at bottom right, rgba(93, 255, 175, 0.12), transparent 52%),
                     var(--bg-main);
                 position: relative;
-                overflow: hidden;
+                overflow-x: hidden;
             }
 
             body::before {
@@ -202,6 +202,8 @@
 
             @media (max-width: 640px) {
                 body {
+                    align-items: flex-start;
+                    justify-content: flex-start;
                     padding: 32px 16px;
                 }
 
